@@ -54,11 +54,11 @@ solved (both legs on moon within landing pad): +200 points
 
 **Policy**: the probability distribution over all possible actions (to move the lander) that can be taken from a specific state of the lander
 
-# 1.3 
+# 1.3 Model Based RL/ Environment Dynamics
 
-**Policy Evaluation** =
+**Policy Evaluation** = a dynamic programming approach that **estimates V(s) for each state** s∈S by using the Bellman equation
 
-**Policy Iteration** =
+**Policy Iteration** = a policy-based method that is applied to **improve the policy** by alternating between two steps: (1) policy evaluation (estimation of V, using current policy), and (2) policy improvement (update policy based on V-estimation)
 
 **Environment Dynamics** = the rules that govern how the agent interacts with the environment. The environment dynamics include 2 functions -  reward function and state transition function. Both determine the consequences of an agent’s action and guide its decision-making/learning process. The agent needs to have an accurate model of the environment dynamics to make good (or even optimal) decisions.
 If the Environment Dynamics are fully known, then the agent is able to learn an optimal policy. 
@@ -67,9 +67,13 @@ If the Environment Dynamics are fully known, then the agent is able to learn an 
 
 **State transition function** = probability distribution that describes the probabilities of all possible transitions from initial state s to another state s’, when making a certain action a (all possible actions). 
 
-Example 1:
+Example 1 - GridWorld: The environment dynamics are static, i.e. they cannot change throughout time
+- State transition function: The agent moves from tile to tile until reaching a goal tile. There are 4 possible actions - move up, down, left, right. When moving against a wall, the agent stays in the tile. With a certain probability, the agent moves in the chosen direction (e.g. p=0.7), but there is the chance that it will conduct another action, i.e. move into another direction.
+- Reward function: Each tile / Some tiles have rewards associated with them (e.g. trap tiles have a penality, i.e. negative reward). If the agent moves to such a tile, it will receive the corresponding positive/negative reward.
 
-Example 2:
+Example 2 - Autonomous driving: The environment dynamics are not static, i.e. they can change through time
+- State transition function: The agent moves the car from position (x,y) to (x2,y2). There are multiple actions that can be defined, such as speed and direction. The probabilities of actually conducting the chosen action can change throughout time, e.g. by weather changes (rain -> slippy road lowers probability of conducting chosen action).
+- Reward function: Each action gives a reward, e.g. driving against a tree gives a penality. The rewards for a similar action can change through time, because different aspects might become important in different situations (e.g. in less-crowded places the reward will be higher for making more distance in less actions, but in crowded places the reward will be lower and instead higher for making shorter steps/less speed/less distance).
 
 **_Are the environment dynamics generally known?_**
 
