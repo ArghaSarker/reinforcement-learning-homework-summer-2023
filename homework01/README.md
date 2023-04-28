@@ -8,6 +8,7 @@
 **State transition (probability) function p**: the probability distribution over all possible board states S’ that can be reached from the current state s, taking action a
 
 **Reward function**:
+
 capturing an opponent’s piece: reward is based on piece value
 - pawn: +1
 - knight: +3
@@ -15,6 +16,7 @@ capturing an opponent’s piece: reward is based on piece value
 - rook: +5
 - queen: +9
 - king: +∞
+
 losing a piece:
 - pawn: -1
 - knight: -3
@@ -22,13 +24,17 @@ losing a piece:
 - rook: -5
 - queen: -9
 - king: -∞
+
 making a move: -0.5 (punishment to prefer quick games)
+
 pawn promotion: reward amount depends on piece chosen
 - pawn: +0
 - knight: +2
 - bishop: +2
 - rook: +4
 - queen: +8
+
+(similar amount of punishment if opponent gets to do pawn promotion)
 
 **Policy**: The probability distribution over all possible actions, given an initial state that gets optimized during learning such that higher probability is assigned to better move options. This probability also depends on the opponent player’s move.
 
@@ -43,14 +49,14 @@ state in 8-dimensional vector: coordinates (x,y) of lander, lander’s linear ve
 -> transition probability is determined/influenced by the physics of the simulation (e.g. firing main engine will increase velocity in the direction of its orientation, but also consume fuel)
 
 **Reward function**:
-moving from top of screen to landing pad and coming to rest: 100-140 points
-moving away from the landing pad: - ???
-lander crashes (body, i.e. neither leg, contacts moon):  -100 points
-lander comes to rest: +100 points
-left/right leg has ground contact: +10
-firing main engine: -0.3 points each frame
-firing side engine: -0.3 points each frame
-solved (both legs on moon within landing pad): +200 points
+- moving from top of screen to landing pad and coming to rest: 100-140 points
+- moving away from the landing pad: -5 points
+- lander crashes (body, i.e. neither leg, contacts moon):  -100 points
+- lander comes to rest: +100 points
+- left/right leg has ground contact: +10
+- firing main engine: -0.3 points each frame
+- firing side engine: -0.3 points each frame
+- solved (both legs on moon within landing pad): +200 points
 
 **Policy**: the probability distribution over all possible actions (to move the lander) that can be taken from a specific state of the lander
 
